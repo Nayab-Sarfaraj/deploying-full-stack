@@ -7,7 +7,7 @@ const register = async (req, res, next) => {
     if (!email || !password || !name)
       return res.json({ success: false, message: "all fields are required" });
     const newuser = await User({ email, password, name });
-   
+
     const saveduser = await newuser.save();
 
     return res.json({ success: true, saveduser });
@@ -44,6 +44,11 @@ const login = async (req, res, next) => {
 const getUserProfile = async (req, res, next) => {
   try {
     const token = req.cookies.token;
+    if (!token)
+      return res.json({
+        success: false,
+        message: "invalid token",
+      });
     const decodedData = jwt.verify(token, process.env.SECRET_KEY);
     if (!decodedData)
       return res.json({
