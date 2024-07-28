@@ -9,7 +9,7 @@ app.use(cookieParser());
 const userRouter = require("./routes/userRoutes");
 app.use("/api/v1", userRouter);
 app.use("/", (req, res, next) =>
-  res.json({ success: true, message: "deployed" })
+  res.json({ success: true, message: "deployed aya" })
 );
 const PORT = process.env.PORT || 5000;
 
